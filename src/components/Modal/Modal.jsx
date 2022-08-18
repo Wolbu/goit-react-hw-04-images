@@ -1,40 +1,38 @@
 import PropTypes from 'prop-types';
 import s from './Modal.module.css';
-import { Component } from 'react';
+import { useEffect } from 'react';
 
-export default class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeydown);
-  }
+const Modal = ({ images, closeModal }) => {
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeydown);
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeydown);
-  }
+    return () => {
+      window.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
 
-  handleKeydown = e => {
+  const handleKeydown = e => {
     if (e.code === 'Escape') {
-      console.log('CLOSED MODAL');
-      this.props.closeModal();
+      closeModal();
     }
   };
 
-  handleBackdrop = e => {
+  const handleBackdrop = e => {
     if (e.target === e.currentTarget) {
-      this.props.closeModal();
+      closeModal();
     }
   };
 
-  render() {
-    const { images } = this.props;
-    return (
-      <div className={s.Overlay} onClick={this.handleBackdrop}>
-        <div className={s.Modal}>
-          <img src={images} alt="" />
-        </div>
+  return (
+    <div className={s.Overlay} onClick={handleBackdrop}>
+      <div className={s.Modal}>
+        <img src={images} alt="" />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Modal;
 
 Modal.propTypes = {
   images: PropTypes.string.isRequired,
