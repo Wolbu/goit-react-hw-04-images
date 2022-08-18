@@ -13,7 +13,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [modalImageURL, setModalImageURL] = useState('');
 
   useEffect(() => {
