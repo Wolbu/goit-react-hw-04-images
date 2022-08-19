@@ -13,7 +13,6 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [showModal, setShowModal] = useState(false);
   const [modalImageURL, setModalImageURL] = useState('');
 
   useEffect(() => {
@@ -32,8 +31,12 @@ const App = () => {
         }
         setImages([...images, ...data.hits]);
       })
-      .catch(error => setError({ error }))
+      .catch(err => {
+        setError({ err });
+        alert(error);
+      })
       .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, page]);
 
   const handleFormSubmit = searchQuery => {
