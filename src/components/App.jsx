@@ -46,7 +46,7 @@ const App = () => {
     }
     return;
   };
-
+  // Load More
   const onLoadMore = () => {
     setPage(page + 1);
   };
