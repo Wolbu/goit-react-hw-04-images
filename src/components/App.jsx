@@ -41,6 +41,7 @@ const App = () => {
 
   const handleFormSubmit = searchQuery => {
     if (searchQuery !== query) {
+      setPage(1);
       setQuery(searchQuery);
       setImages([]);
     }
